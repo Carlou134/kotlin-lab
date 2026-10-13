@@ -184,3 +184,9 @@ That's why swapping the console for a graphical interface means **adding an adap
 | v1.x | Exercises for stage 08 onward | Planned |
 | v1.x | Automated tests to check solutions (after stage 19, Testing) | Planned |
 | **v2 — platform** | Compose UI as a new adapter, reusing `lab/domain` and `lab/port` | Future |
+
+-----
+
+## License
+
+[MIT](LICENSE)

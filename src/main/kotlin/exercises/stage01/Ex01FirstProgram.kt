@@ -1,6 +1,8 @@
 package exercises.stage01
 
 import lab.domain.Exercise
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 /*
  * ============================================================
@@ -41,14 +43,32 @@ val ex01 = Exercise(
     title = "Cabecera de un ticket",
     wikiLesson = "01-fundamentos/01-introduccion.md",
     explanation = """
-        TODO: explica con tus palabras (borra esta línea al terminar).
         - ¿Qué es fun main() y por qué todo programa necesita uno?
+        fun main() es el punto de entrada del programa: la primera función que la JVM ejecuta.
+        No es donde se compila: el compilador traduce todo el archivo .kt a bytecode antes de
+        que el programa arranque. Sin main(), la JVM no sabría por dónde empezar.
+        
         - ¿Qué diferencia hay entre print() y println()?
+        print() se encarga de imprimir en la misma linea en consola. println() imprime en consola y 
+        termina con un salto de linea.
+        
         - ¿Para qué sirven los comentarios si el programa los ignora?
+        Los comentarios sirven para explicar ciertos fragmentos del codigo a otras personas
+        (o a mí en el futuro), y para desactivar código sin borrarlo.
+        
+        - ¿Qué pasa si cambias el último println() por print() y ejecutas
+        el ejercicio desde el menú? ¿Dónde aparece el siguiente texto?
+        Si hago el cambio, cada nuevo texto que quiera añadir se imprimira en la misma linea que el ultimo print.
+        Por ende, el siguiente texto aparecera al costado de la última línea que escribí.
+      
     """.trimIndent(),
     solve = ::primerPrograma,
 )
 
 fun primerPrograma() {
-    TODO("Ejercicio 1.1")
+    println("==============================")
+    println("\tTIENDA DON PEPE")
+    println("==============================")
+    print("Fecha: ${LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))}\nCajero: Ana\n")
+    println("¡Gracias por su compra!")
 }

@@ -41,10 +41,24 @@ val ex03 = Exercise(
     title = "Recorrer código con el debugger",
     wikiLesson = "01-fundamentos/03-entorno-intellij.md",
     explanation = """
-        TODO: explica con tus palabras (borra esta línea al terminar).
         - ¿Qué es un breakpoint y para qué sirve?
+        Es un punto de interrupción, sirve para detener el programa en puntos especificos y el usuario decide
+        cuando continuar
+        
         - ¿Qué recorrido hace tu código desde el .kt hasta que ves la salida?
           (compilador, bytecode, JVM)
+          El compilador lo traduce a bytecode. Luego la Java Virtual Machine se encarga de ejecutarlo. 
+          
+        - ¿Qué valor tiene "stock" justo ANTES de ejecutar cada println?
+        Primero inicia con 10, luego tiene 7, luego continua con 12. Finalmente tiene 24. 
+        
+        - ¿Qué diferencia hay entre Step Over (F8) y Step Into (F7)?
+        Step Over ejecuta la línea completa, incluidas las funciones que llame, sin entrar en ellas.
+        Step Into, si la línea llama a una función, entra en ella y la recorre por dentro.
+
+        - ¿Qué hace Resume Program (F9)?
+        Continúa la ejecución hasta el próximo breakpoint, o hasta el final si no hay más.
+          
     """.trimIndent(),
     solve = ::recorridoConDebugger,
 )

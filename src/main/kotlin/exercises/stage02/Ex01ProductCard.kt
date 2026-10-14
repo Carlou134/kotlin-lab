@@ -59,14 +59,56 @@ val ex01 = Exercise(
     title = "Ficha de producto",
     wikiLesson = "02-tipos-y-variables/01-tipos-y-variables.md",
     explanation = """
-        TODO: explica con tus palabras (borra esta línea al terminar).
         - ¿Qué diferencia hay entre val y var? ¿Cuál usas por defecto y por qué?
+        val es para definir variables inmutables. var es para variables que se puede cambiar.
+        Por defecto usamos val: si un valor no puede cambiar, no tengo que seguirle el rastro por el código,
+        y si intento cambiarlo por error el compilador me avisa. Menos cosas que cambian, menos bugs.
+        Uso var solo cuando el valor realmente necesita cambiar (como precio y stock).
+        
         - ¿Qué es la inferencia de tipos? ¿Cuándo conviene declarar el tipo a mano?
+        Inferencia por tipos se refiere a que el compiladr sabe que tipo de dato es solo con el valor.
+        Conviene declarar el tipo cuando aun no le asignas valor, o cuando el tipo que infiere el compilador
+        no es el que quiero. Ejemplo: 1002003004 entra en un Int, así que sin ": Long" lo infiere como Int.
+
         - ¿Por qué Kotlin no convierte solo un String a número?
+        Porque no todo String es un número: "hola" no se puede convertir. Kotlin me obliga a convertir
+        de forma explícita (toInt(), toDouble()) para que yo decida qué pasa si la conversión falla.
+
+        - ¿Por qué 49.9 x 3 no da exactamente 149.7?
+        Porque un Double guarda los números en binario, y 49.9 no tiene representación exacta en binario
+        (como 1/3 = 0.333... en decimal). Ese pequeño error se arrastra al multiplicar.
+        
+        - ¿Por qué 149.9 como Int da 149 y no 150?
+        Porque hace un casteo no un redondeo. 
+        
+        - Al intenar re-asignar la variable nombre con otro valor nos da el siguiente error: 
+            Ex01ProductCard.kt:103:5 'val' cannot be reassigned.
+
+        
     """.trimIndent(),
     solve = ::fichaDeProducto,
 )
 
 fun fichaDeProducto() {
-    TODO("Ejercicio 2.1")
+    val nombre = "Teclado mecánico"
+    val codigo: Long = 1002003004
+    var precio = 189.9
+    var stock = 15
+    val activo: Boolean = true
+
+    println("Producto: $nombre\nCódigo: $codigo\nPrecio: $precio\nStock: $stock\nActivo: $activo")
+
+    precio = 149.9
+    stock -= 1
+    println("--- Después de la oferta y una venta ---\nPrecio: $precio\nStock: $stock")
+
+    val precioTexto = "49.90"
+    val precioConvertivo = precioTexto.toDouble()
+
+    val cantidadTexto = "3"
+    val cantidadConvertida = cantidadTexto.toInt()
+
+    println("--- Conversiones ---\n\"49.90\" como Double: ${precioConvertivo}\n\"3\" como Int: ${cantidadConvertida}")
+    println("49.9 x 3 = ${precioConvertivo * cantidadConvertida}")
+    println("149.9 como Int: ${precio.toInt()}")
 }

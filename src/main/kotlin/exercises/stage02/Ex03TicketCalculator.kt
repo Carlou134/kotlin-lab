@@ -51,14 +51,63 @@ val ex03 = Exercise(
     title = "Calculadora de ticket",
     wikiLesson = "02-tipos-y-variables/03-numeros.md",
     explanation = """
-        TODO: explica con tus palabras (borra esta línea al terminar).
         - ¿Cuándo usas Int, Long y Double?
+        Int para enteros. 
+        Long cuando el valor entero es demasiado grande. 
+        Double principalmente para numeros decimales.
+        
         - ¿Qué pasa cuando divides dos Int?
+        Cuando divides dos Int se hace la división entre enteros. Por lo que se trunca el resultado.
+        
         - ¿Para qué sirve el operador %? Da un ejemplo real.
+        El operador % sirve para calcular el resto de una división.
+        Por ejemplo en el caso de 50 % 12. El resto de la division da igual 2.
+        
+        - ¿Cuánto da 10 + 5 * 2? ¿Y (10 + 5) * 2? ¿Por qué?
+        El primero da 20, Porque primero se realiza la multiplicación
+        El segundo da 30. Porque primero se realiza el parentesis antes de la multiplicación.
+        
+        - ¿Cuánto da 50 / 12 y cuánto da 50.0 / 12? ¿Por qué son distintos?
+        El primero da 4. El segundo da 4.16. 
+        Son distintos pq el primero maneja enteros y se trunca.
+        El segundo uno de los valores ya es decimal.
+        
+        - ¿Por qué el truco de redondeo divide por 100.0 y no por 100?
+        Porque Math.round() devuelve un Long (un entero). Si lo divido por 100, es una división
+        entera y se pierden los decimales: 4293 / 100 = 42. Con 100.0 la división es Double: 42.93.
+        Es lo mismo que pasa con 50 / 12.
+
     """.trimIndent(),
     solve = ::calculadoraDeTicket,
 )
 
 fun calculadoraDeTicket() {
-    TODO("Ejercicio 2.3")
+    var unidadesVendidas = 0
+
+    val precioArroz = 4.5
+    val cantidadArroz = 10
+    unidadesVendidas += cantidadArroz
+
+    val precioAceite = 18.5
+    val cantidadAceite = 4
+    unidadesVendidas += cantidadAceite
+
+    val precioCafe = 119.5
+    val cantidadCafe = 1
+    unidadesVendidas += cantidadCafe
+
+    var tickets = 0
+
+    val subtotal = (precioArroz * cantidadArroz) + (precioAceite * cantidadAceite) + (precioCafe * cantidadCafe)
+    val impuesto = Math.round((subtotal * 0.18) * 100) / 100.0
+    val total = Math.round((subtotal + impuesto) * 100) / 100.0
+    val precioMasCaro = maxOf(precioArroz, precioAceite, precioCafe)
+    tickets++
+
+    val cajasCompletas: Int = 50 / 12
+    val botellasSueltas = 50 % 12
+
+    println("Subtotal: $subtotal\nImpuesto (18%): $impuesto\nTotal: $total")
+    println("Precio unitario más caro: $precioMasCaro\nUnidades vendidas: $unidadesVendidas")
+    println("Tickets emitidos: $tickets\nCajas completas: $cajasCompletas\nBotellas sueltas: $botellasSueltas")
 }

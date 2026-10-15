@@ -49,14 +49,34 @@ val ex03 = Exercise(
     title = "Inventario",
     wikiLesson = "03-colecciones/03-maps.md",
     explanation = """
-        TODO: explica con tus palabras (borra esta línea al terminar).
         - ¿Qué es una clave y qué es un valor en un map?
+        La clave es el dato con el que busco, y es única: no puede haber dos claves iguales.
+        El valor es el dato asociado a esa clave. Cada clave apunta a un solo valor.
+        Ejemplo: en "aceite" to 18.5, "aceite" es la clave y 18.5 el valor.
+
         - ¿Por qué buscar "azúcar" devuelve null en vez de romper el programa?
+        Porque el map está diseñado así: buscar una clave que no existe es algo normal, no un error,
+        y null significa "no hay valor para esa clave". En cambio, una lista con un índice
+        que no existe (lista[10]) sí revienta con IndexOutOfBoundsException.
+
         - ¿Cuándo elegirías un map en vez de una lista?
+        Cuando necesito buscar un dato por una clave: código -> producto, usuario -> email,
+        producto -> stock. Con una lista tendría que recorrerla entera para encontrarlo.
+        
     """.trimIndent(),
     solve = ::inventario,
 )
 
 fun inventario() {
-    TODO("Ejercicio 3.3")
+    val precios = mapOf("arroz" to 4.5, "aceite" to 18.5, "café" to 119.5)
+    println("Precio del aceite: ${precios["aceite"]}\nPrecio del azúcar: ${precios["azúcar"]}")
+    println("Productos: ${precios.keys}")
+    println("Precios: ${precios.values}")
+    println("Cantidad: ${precios.size}")
+
+    val stock = mutableMapOf("arroz" to 30, "aceite" to 12)
+    stock.put("café", 5)
+    stock["aceite"] = 10
+    stock.remove("arroz")
+    println("Stock final: $stock")
 }

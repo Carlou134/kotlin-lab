@@ -46,14 +46,36 @@ val ex02 = Exercise(
     title = "Etiquetas únicas",
     wikiLesson = "03-colecciones/02-sets.md",
     explanation = """
-        TODO: explica con tus palabras (borra esta línea al terminar).
         - ¿Qué problema resuelve un set que una lista no?
+        Resuelve el problema de los duplicados.
+        
         - ¿Por qué en un set no se usa set[0] como en una lista?
+        Porque un set no es una lista: no tiene posiciones como concepto. Lo que le importa es si
+        un elemento está o no está. (El setOf de Kotlin conserva el orden de inserción, pero no
+        ofrece acceso por índice.) elementAt() lo recorre elemento por elemento hasta llegar ahí.
+
         - Da un ejemplo real (de una tienda) donde usarías un set.
+        Los códigos de cupones ya usados: un cupón se usa una sola vez, así que un repetido sería
+        un error. Con un set, add() me devuelve false si el cupón ya estaba.
+
+        
     """.trimIndent(),
     solve = ::etiquetasUnicas,
 )
 
 fun etiquetasUnicas() {
-    TODO("Ejercicio 3.2")
+    val listaEtiquetas = listOf("oferta", "nuevo", "lácteos", "oferta", "bebidas", "nuevo", "bebidas", "oferta")
+    println("Lista: ${listaEtiquetas.size} etiquetas")
+
+    val setEtiquetas = setOf("oferta", "nuevo", "lácteos", "oferta", "bebidas", "nuevo", "bebidas", "oferta")
+    println("Set: $setEtiquetas -> ${setEtiquetas.size} etiquetas")
+    println("Primera: ${setEtiquetas.elementAt(0)}")
+
+    val setModificable = mutableSetOf<String>()
+    println("¿Agregó \"oferta\"? ${setModificable.add("oferta")}")
+    println("¿Agregó \"oferta\" otra vez? ${setModificable.add("oferta")}")
+
+    setModificable.remove("oferta")
+    setModificable.add("temporada")
+    println(setModificable)
 }

@@ -56,14 +56,53 @@ val ex01 = Exercise(
     title = "Lista de compras",
     wikiLesson = "03-colecciones/01-listas.md",
     explanation = """
-        TODO: explica con tus palabras (borra esta línea al terminar).
         - ¿Qué diferencia hay entre listOf y mutableListOf?
+        Un listOf es una lista inmutable de datos. Es decir solo lectura. 
+        Un mutableListOf es una lista que permite hacer modificaciones.
+        
         - Si la lista es val, ¿por qué igual puedo agregarle elementos a una mutableList?
+        Porque val congela la variable, no el contenido. La variable no puede apuntar a OTRA lista,
+        pero si la lista es mutable, puedo agregar y quitar elementos adentro.
+        Es como una caja con etiqueta: la etiqueta no se puede pegar en otra caja, pero puedo
+        meter y sacar cosas de la caja.
+
         - ¿Qué diferencia hay entre un array y una lista?
+        La diferencia es el tamaño. Un array tiene tamaño fijo: puedo cambiar sus elementos,
+        pero no agregar ni quitar. Una mutableList puede crecer y achicarse.
+        (Un listOf tampoco crece, pero además no deja cambiar sus elementos: es solo lectura.)
+        
+        Cuando imprimes directamente el array, no muestra su contenido sino su tipo y un código:
+            [Ljava.lang.Double;@3b192d32
+        "[Ljava.lang.Double;" significa "array de Double" y lo que va después de @ es su hashCode
+        en hexadecimal (no es la dirección en memoria). Por eso existe contentToString().
+
+        Cuando intentas añadir un elemento a una lista de solo lectura te sale el siguiente error:
+            Ex01ShoppingList.kt:101:11 Unresolved reference 'add'.
+        El tipo List directamente no tiene la función add(): no es que esté bloqueada, es que no existe.
+        Las funciones de modificación solo están en MutableList.
+        
     """.trimIndent(),
     solve = ::listaDeCompras,
 )
 
 fun listaDeCompras() {
-    TODO("Ejercicio 3.1")
+    val lista = listOf("pan", "leche", "huevos", "café")
+
+    println(lista)
+    println("Tamaño: ${lista.size}\nPrimero: ${lista[0]}\nÚltimo: ${lista[lista.size - 1]}")
+    println("¿Tiene leche? ${lista.contains("leche")}\n¿Tiene arroz? ${lista.contains("arroz")}")
+
+    val copiaLista = mutableListOf<String>()
+    copiaLista.addAll(lista)
+    copiaLista.add("arroz")
+    copiaLista.add(0, "agua")
+    copiaLista.remove("huevos")
+    copiaLista[copiaLista.indexOf("café")] = "té"
+
+    println("Tamaño: ${copiaLista.size}")
+    println(copiaLista)
+
+    val arrayPrecios = arrayOf(3.5, 4.2, 12.0)
+    arrayPrecios[1] = 3.9
+    println(arrayPrecios.contentToString())
 }
